@@ -8,7 +8,7 @@ export function Card({
 }
 ): JSX.Element {
   return (
-    <div className="border p-5 flex">
+    <div className="border p-6 flex bg-white rounded-xl justify-between flex-col bg-[#ededed]">
       <h1 className="text-xl border-b pb-2">
         {title}
       </h1>

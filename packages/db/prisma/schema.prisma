@@ -55,7 +55,7 @@ enum AuthType {
 }
 
 enum OnRampStatus {
-  Sucess
+  Success
   Failure
   Processing
 }
