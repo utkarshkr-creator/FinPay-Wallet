@@ -1,5 +1,29 @@
 -- CreateEnum
-CREATE TYPE "OnRampStatus" AS ENUM ('Sucess', 'Failure', 'Processing');
+CREATE TYPE "AuthType" AS ENUM ('Google', 'Github');
+
+-- CreateEnum
+CREATE TYPE "OnRampStatus" AS ENUM ('Success', 'Failure', 'Processing');
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" SERIAL NOT NULL,
+    "email" TEXT,
+    "name" TEXT,
+    "phonNumber" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Merchant" (
+    "id" SERIAL NOT NULL,
+    "email" TEXT NOT NULL,
+    "name" TEXT,
+    "auth_type" "AuthType" NOT NULL,
+
+    CONSTRAINT "Merchant_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "OnRampTransaction" (
@@ -25,13 +49,19 @@ CREATE TABLE "Balance" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_phonNumber_key" ON "User"("phonNumber");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Merchant_email_key" ON "Merchant"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "OnRampTransaction_token_key" ON "OnRampTransaction"("token");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Balance_userId_key" ON "Balance"("userId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Balance_amount_key" ON "Balance"("amount");
 
 -- AddForeignKey
 ALTER TABLE "OnRampTransaction" ADD CONSTRAINT "OnRampTransaction_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

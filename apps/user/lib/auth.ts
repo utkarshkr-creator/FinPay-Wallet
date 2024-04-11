@@ -22,8 +22,6 @@ export const authOptions = {
 
         if (existingUser) {
           const passwordValidation = await bcrypt.compare(credentials.password, existingUser.password);
-          console.log(passwordValidation);
-          console.log(credentials.password, existingUser.password);
           if (passwordValidation) {
             return {
               id: existingUser.id.toString(),
@@ -38,10 +36,16 @@ export const authOptions = {
           const user = await db.user.create({
             data: {
               phoneNumber: credentials.phone,
-              password: hashedPassword
+              password: hashedPassword,
+              Balance: {
+                create: {
+                  amount: 0,
+                  locked: 0
+                }
+              },
+
             }
           });
-
           return {
             id: user.id.toString(),
             name: user.name,
