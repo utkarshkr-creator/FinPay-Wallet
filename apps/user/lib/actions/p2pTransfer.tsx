@@ -17,9 +17,15 @@ export async function p2pTransfer(receiver: string, amount: number) {
     }
   }
   );
+
   if (!peerUser) {
     return {
       message: "User Not Found."
+    }
+  }
+  if (peerUser.id == sender) {
+    return {
+      message: "You can't send Money to Your Account"
     }
   }
   let TrsnsactionSuccess = true;

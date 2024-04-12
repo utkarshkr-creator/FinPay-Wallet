@@ -31,7 +31,6 @@ export async function createOnRampTransactions(provider: string, amount: number)
         }
       })
     } else {
-      console.log(token)
       await tx.onRampTransaction.create({
         data: {
           provider,

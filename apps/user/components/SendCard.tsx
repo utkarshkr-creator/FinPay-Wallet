@@ -54,7 +54,7 @@ export function SendCard() {
       onChange={(val) => { setAmount(Number(val) * 100) }}
       placeholder="Enter Amount" label="Amount" />
     <div className="flex justify-center pt-4">
-      <Button onClick={handleSendClick} disabled={true}>
+      <Button onClick={handleSendClick} disable={isSending}>
         {isSending ? 'Sending...' : 'Send'}
       </Button>
     </div>
